@@ -14,5 +14,4 @@
                          revealPoint(i);
                      }
                      
-                
              };
