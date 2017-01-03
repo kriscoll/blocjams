@@ -1,27 +1,32 @@
-                var pointsArray = document.getElementsByClassName('point');
+    var pointsArray = document.getElementsByClassName('point');
  
-                var animatePoints = function(points) {
-                 
-                var revealPoint = function(index) {
-                     points[index].style.opacity = 1;
-                     points[index].style.transform = "scaleX(1) translateY(0)";
-                     points[index].style.msTransform = "scaleX(1) translateY(0)";
-                     points[index].style.WebkitTransform = "scaleX(1) translateY(0)";
-                 };
- 
-                
+    var revealPoint = function(pointsListed) {
+        pointsListed.style.opacity = 1;
+        pointsListed.style.transform = "scaleX(1) translateY(0)";
+        pointsListed.style.msTransform = "scaleX(1) translateY(0)";
+        pointsListed.style.WebkitTransform = "scaleX(1) translateY(0)";
+            };
+
+
+
+
+
+    var animatePoints = function(points) {
+        forEach(points,revealPoint);
+                    
+    //loop that will loop through each element in the array
+    //for(var i=0; i <array.length; i++){
+    //executes callback function for each element in the array
+    //callback(array[i]);
     
-                for (i = 0; i < points.length; i++) {
-                revealPoint(i);
-                }
-    
+            
              };
-    //All items that require window to be completely loaded before executing are placed in this block of code
-window.onload = function() {
+    // all items that require window to be completely loaded before executing are placed in this block of code
+    window.onload = function() {
     
     // animate items automatically on tall screens where scrolling does not initiate animation
     if (window.innerHeight > 950) {
-         animatePoints(pointsArray); 
+        animatePoints(pointsArray); 
      }
     
     // pulls the items that will be animated; in this case, selling-points will be animated.
@@ -33,7 +38,7 @@ window.onload = function() {
     // when user scrolls something, an event, happens
      window.addEventListener('scroll', function(event) {
          
-      if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
+    if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
              animatePoints(pointsArray);   
          }   
      });
