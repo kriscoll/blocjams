@@ -36,7 +36,7 @@
      artist: 'James Taylor',
      label: 'EM',
      year: '1997',
-     albumArtUrl: 'assets/images/album_covers/20.png',
+     albumArtUrl: 'assets/images/album_covers/22.png',
      songs: [
          { title: 'Time for You to Go.', duration: '3:00' },
          { title: 'Hello Goodbye', duration: '1:21' },
@@ -60,21 +60,21 @@
  
      return template;
  };
- var setCurrentAlbum = function(album) {
-     // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
+
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+ var setCurrentAlbum = function(album) { 
      // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
  
-     // #3
+     // empty the bucket
      albumSongList.innerHTML = '';
  
      // #4
@@ -88,18 +88,16 @@
  };
 
      var count = 0;
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-
      var albumCatalog = [albumPicasso, albumMarconi, albumTaylor];
  
      albumImage.addEventListener("click", function( event ) {
  
-     setCurrentAlbum(albumCatalog[count]);
- 
-     count++;
- 
-     if( count === albumCatalog.length ){
-       count = 0;
-     }
- 
-   }, true);
+         setCurrentAlbum(albumCatalog[count]);
+
+         count++;
+
+         if( count === albumCatalog.length ){
+           count = 0;
+         };
+         
+     });
