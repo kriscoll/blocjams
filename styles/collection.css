@@ -24,15 +24,15 @@
  .collection-album-container .caption p {
      font-size: 1rem;
      font-weight: 300;
-     color: rgba(255, 255, 255, 0.6);
+     color: green;
  }
  
  .collection-album-container .caption p a {
-     color: rgba(255, 255, 255, 0.6);
+     color: purple;
  }
  
  .collection-album-container .caption p a.album-name {
-     color: white;
+     color: black;
  }
  
  .collection-album-container img {
