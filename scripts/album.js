@@ -1,4 +1,6 @@
- // Example Album
+ /*These objects represent albums.  The object stores information such as album title, artist, label, songs*/
+
+//Example Album
  var albumPicasso = {
      title: 'The Colors',
      artist: 'Pablo Picasso',
@@ -48,7 +50,7 @@
 
 
 
-
+//generates the content on the song row
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -61,23 +63,29 @@
      return template;
  };
 
+//select elements that I want to populate with text
 var albumImage = document.getElementsByClassName('album-cover-art')[0];
 var albumTitle = document.getElementsByClassName('album-view-title')[0];
 var albumArtist = document.getElementsByClassName('album-view-artist')[0];
 var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
 var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
-  var setCurrentAlbum = function(album) { 
-     // #2
+
+/*setCurrentAlbum function will be called when window loads  It will take one of the album objects as an argument and use the stored information by injecting it into the template.*/
+
+  var setCurrentAlbum = function(album) {
+      
+      
+     // assign values to each part of the album, i.e text, images
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
  
-     // empty the bucket
+     // empty contents of album song list container
      albumSongList.innerHTML = '';
  
-     // #4
+     // build list of songs from album js object
      for (var i = 0; i < album.songs.length; i++) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
@@ -109,7 +117,7 @@ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
   };
 
-     var count = 0;
+     var count = 1;
      var albumCatalog = [albumPicasso, albumMarconi, albumTaylor];
  
      albumImage.addEventListener("click", function( event ) {
@@ -118,7 +126,7 @@ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
          count++;
 
-         if( count === albumCatalog.length ){
+         if( count == albumCatalog.length ){
            count = 0;
          };
          
