@@ -103,6 +103,7 @@ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
    var currentlyPlayingSong = null;
 
  window.onload = function() {
+     
      setCurrentAlbum(albumPicasso);
      
      var findParentByClassName = function(element, targetClass) {
