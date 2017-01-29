@@ -22,24 +22,23 @@
             
              };
     // all items that require window to be completely loaded before executing are placed in this block of code
-    window.onload = function() {
+    $(window).load(function() {
     
     // animate items automatically on tall screens where scrolling does not initiate animation
-    if (window.innerHeight > 950) {
-        animatePoints(pointsArray); 
+    if ($(window).height() > 950) {
+         animatePoints(); 
      }
     
-    // pulls the items that will be animated; in this case, selling-points will be animated.
-    var sellingPoints = document.getElementsByClassName('selling-points')[0];
-    
-    // set up distance page scrolls before element is viewable in the browser window.  User must scroll at least 200 //pixels in order for selling points to be seen in the browser. 
-    var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;
+    // pulls the items that will be animated; in this case, selling-points will be animated. Set up distance page scrolls before element is viewable in the browser window.  User must scroll at least 200 //pixels in order for selling points to be seen in the browser. 
+        
+    var scrollDistance = $('.selling-points').offset().top - $(window).height() + 200;
     
     // when user scrolls something, an event, happens
-     window.addEventListener('scroll', function(event) {
+     $(window).scroll(function(event) {
          
-    if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
-             animatePoints(pointsArray);   
+    if ($(window).scrollTop() >= scrollDistance) {
+             animatePoints();   
          }   
      });
- }
+        
+ });

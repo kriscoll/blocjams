@@ -205,17 +205,17 @@ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
   };
 
-     var count = 1;
-     var albumCatalog = [albumPicasso, albumMarconi, albumTaylor];
- 
-     albumImage.addEventListener("click", function( event ) {
- 
-         setCurrentAlbum(albumCatalog[count]);
-
-         count++;
-
-         if( count == albumCatalog.length ){
-           count = 0;
-         };
-         
-     });
+//     var count = 1;
+//     var albumCatalog = [albumPicasso, albumMarconi, albumTaylor];
+// 
+//     albumImage.addEventListener("click", function( event ) {
+// 
+//         setCurrentAlbum(albumCatalog[count]);
+//
+//         count++;
+//
+//         if( count == albumCatalog.length ){
+//           count = 0;
+//         };
+//         
+//     });
