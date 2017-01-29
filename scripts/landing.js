@@ -1,25 +1,19 @@
-    var pointsArray = document.getElementsByClassName('point');
- 
-    var revealPoint = function(pointsListed) {
-        pointsListed.style.opacity = 1;
-        pointsListed.style.transform = "scaleX(1) translateY(0)";
-        pointsListed.style.msTransform = "scaleX(1) translateY(0)";
-        pointsListed.style.WebkitTransform = "scaleX(1) translateY(0)";
-            };
+        var animatePoints = function() {
+         var revealPoint = function() {
+          // #7
+          $(this).css({
+              opacity: 1,
+              transform: 'scaleX(1) translateY(0)'
+          });
+      };
 
 
 
-
-
-    var animatePoints = function(points) {
-        forEach(points,revealPoint);
+    $.each($('.point'), revealPoint);
                     
-    //loop that will loop through each element in the array
-    //for(var i=0; i <array.length; i++){
-    //executes callback function for each element in the array
-    //callback(array[i]);
+    //loop that will loop through each .point element and executes the call back function, revealPoine. 
     
-            
+        
              };
     // all items that require window to be completely loaded before executing are placed in this block of code
     $(window).load(function() {
@@ -29,7 +23,7 @@
          animatePoints(); 
      }
     
-    // pulls the items that will be animated; in this case, selling-points will be animated. Set up distance page scrolls before element is viewable in the browser window.  User must scroll at least 200 //pixels in order for selling points to be seen in the browser. 
+    // pulls the items that will be animated; in this case, selling-points will be animated. Set up distance page scrolls before element is viewable in the browser window.  User must scroll at least 200 pixels in order for selling points to be seen in the browser. 
         
     var scrollDistance = $('.selling-points').offset().top - $(window).height() + 200;
     
