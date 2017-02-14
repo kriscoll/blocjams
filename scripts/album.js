@@ -149,6 +149,12 @@ var updatePlayerBarSong = function(){
 var setSong = function(songNumber){
     currentlyPlayingSongNumber = songNumber;
     currentSongFromAlbum = currentAlbum.songs[songNumber -1];
+    //new Buzz sound object
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+         // #2
+         formats: [ 'mp3' ],
+         preload: true
+     });
 };
 
 var getSongNumberCell = function(number){
@@ -163,6 +169,7 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
 var currentlyPlayingSongNumber = null; 
 var currentAlbum = null; 
 var currentSongFromAlbum = null;
+var currentSoundFile = null;
 var $nextButton = $('.main-controls .next');
 var $previousButton = $('.main-controls .previous');
 
