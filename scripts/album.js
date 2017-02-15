@@ -26,6 +26,14 @@ var createSongRow = function(songNumber, songName, songLength) {
             setSong(songNumber - 1);
             currentSoundFile.play();
 
+            var $volumeFill = $('.volume .fill');
+   var $volumeThumb = $('.volume .thumb');
+   $volumeFill.width(currentVolume + '%');
+   $volumeThumb.css({left: currentVolume + '%'});
+            
+            
+            
+            
             $(this).html(pauseButtonTemplate);
             updatePlayerBarSong();
             
@@ -83,6 +91,9 @@ var createSongRow = function(songNumber, songName, songLength) {
    };
 
    var setCurrentAlbum = function(album) {
+       
+       
+       
 
     currentAlbum = album;
 
@@ -104,6 +115,99 @@ var createSongRow = function(songNumber, songName, songLength) {
         $albumSongList.append($newRow);
     }
   };
+
+    var updateSeekBarWhileSongPlays = function() {
+   if (currentSoundFile) {
+       // #10
+       currentSoundFile.bind('timeupdate', function(event) {
+           // #11
+           var seekBarFillRatio = this.getTime() / this.getDuration();
+           var $seekBar = $('.seek-control .seek-bar');
+
+           updateSeekPercentage($seekBar, seekBarFillRatio);
+       });
+   }
+};
+
+// Method to update the seek bars
+var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+
+  // Multiply the fill ratio by 100 to determine a percentage
+  var offsetXPercent = seekBarFillRatio * 100;
+
+  // Make sure our percentage isn't less than zero
+  offsetXPercent = Math.max(0, offsetXPercent);
+  // Make sure our percentage doesn't exceed 100%
+  offsetXPercent = Math.min(100, offsetXPercent);
+
+  // Convert the percentage to a string and add the % character
+  var percentageString = offsetXPercent + '%';
+
+  // Apply the percentage to the element's CSS
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+
+};
+
+// Method for determining the seekBarFillRatio in updateSeekPercentage
+var setupSeekBars = function(){
+
+  var $seekBars = $('.player-bar .seek-bar');
+
+  $seekBars.click(function(event){
+
+    var offsetX = event.pageX - $(this).offset().left;
+    var barWidth = $(this).width();
+
+    var seekBarFillRatio = offsetX / barWidth;
+
+  if( $(this).parent().hasClass('seek-control') ){
+
+    // Skip to the seekbar percent in the song
+    seek(seekBarFillRatio * currentSoundFile.getDuration());
+
+  } else {
+
+    // Set the volume based on the seek bar position
+    setVolume(seekBarFillRatio * 100);
+  }
+
+  updateSeekPercentage($(this), seekBarFillRatio);
+
+  });
+
+  $seekBars.find('.thumb').mousedown(function(event) {
+
+    var $seekBar = $(this).parent();
+
+    $(document).bind('mousemove.thumb', function(event){
+      var offsetX = event.pageX - $seekBar.offset().left;
+      var barWidth = $seekBar.width();
+      var seekBarFillRatio = offsetX / barWidth;
+
+      if( $(this).parent().hasClass('seek-control') ){
+
+        // Skip to the seekbar percent in the song
+        seek(seekBarFillRatio * currentSoundFile.getDuration());
+      } else {
+
+        // Set the volume based on the seek bar position
+        setVolume(seekBarFillRatio);
+
+      }
+
+      updateSeekPercentage($seekBar, seekBarFillRatio);
+    });
+
+    $(document).bind('mouseup.thumb', function() {
+      $(document).unbind('mousemove.thumb');
+      $(document).unbind('mouseup.thumb');
+    });
+
+ });
+};
+
+
 
     var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
@@ -128,6 +232,13 @@ var createSongRow = function(songNumber, songName, songLength) {
     });
     setVolume(currentVolume);
   };
+
+
+    var seek = function(time) {
+  if (currentSoundFile) {
+    currentSoundFile.setTime(time);
+  }
+};
 
     var setVolume = function(volume) {
     if (currentSoundFile) {
@@ -231,6 +342,7 @@ var $playPauseButton = $('.main-controls .play-pause');
 
    $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
+    setupSeekBars();
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
     $playPauseButton.click(togglePlayFromPlayerBar);
