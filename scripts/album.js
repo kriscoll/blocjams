@@ -312,12 +312,12 @@ var setupSeekBars = function(){
  
      if (currentSoundFile.isPaused()) {
          currentSoundFile.play();
-         $playPasueButton.html(playerBarPauseButton);
+         $playPauseButton.html(playerBarPauseButton);
          currentlyPlayingCell.html(pauseButtonTemplate);
      }
      else if (!currentSoundFile.isPaused()) {
          currentSoundFile.pause();
-         $playPasueButton.html(playerBarPlayButton);
+         $playPauseButton.html(playerBarPlayButton);
          currentlyPlayingCell.html(playButtonTemplate);
      }
  };

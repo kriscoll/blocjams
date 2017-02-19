@@ -17,20 +17,23 @@ var buildCollectionItemTemplate = function() {
     
     
  
-     // #2
+     // wrap variable in jQuery object
      return $(template);
  };
      $(window).load(function() {
-     // #1
+         
+     // container for album
      var $collectionContainer = $('.album-covers');
-     // #2
+         
+     // make sure container is empty
      $collectionContainer.empty();
  
-     // #3
+     // loop through 12 times
      for (var i = 0; i < 12; i++) {
      
      var $newThumbnail = buildCollectionItemTemplate();
-         // #5
+         
+         // append album template to the container
          $collectionContainer.append($newThumbnail);
      }
  });
